@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{#{% block title %} {{ parent() | Connexion }} {% endblock %}#}
+    {% block nav %}
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('main_site') }}">Qui sommes-nous?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('offre_inserer') }}">Nouvelle offre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('candidat_profil') }}">profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Deconnexion</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block body %}
+        <div class="card ">
+            <div class="card-header d-flex justify-content-center">
+                <h3>Qui sommes nous?</h3>
+            </div>
+            <div class="card-body bg-secondary bg-opacity-25">
+                <h3>Historique</h3>
+
+                <p>
+                    zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                    zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                    zzzzzzzzzzzzzzz
+                </p>
+            </div>
+            <div class="card-body bg-secondary bg-opacity-25">
+                <h3>Nos valeurs</h3>
+
+                <p>
+                    zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                    zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+                    zzzzzzzzzzzzzzz
+                </p>
+            </div>
+        </div>
+    {% endblock %}
+

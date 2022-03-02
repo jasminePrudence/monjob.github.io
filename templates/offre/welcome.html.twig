@@ -1,0 +1,155 @@
+{% extends 'base.html.twig' %}
+{# {% block title %} {{ parent() | Connexion }} {% endblock %} #}
+ {% block stylesheets %}
+     <style>
+
+     </style>
+ {% endblock %}
+    {% block nav %}
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('offre_inserer') }}">Nouvelle
+                                offre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="">profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="">Deconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Connexion</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Qui
+                            sommes-nous?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block body %}
+        <div class="card">
+            <div class="card-header">
+                <div class="col d-flex justify-content-center">
+                    <div class="row ">
+                        <h2>Bienvenue sur MonEmploi</h2><br>
+                    </div>
+                    <div class="row ">
+                        <i>Votre avenir garanti</i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-3">
+                        <img src="{{ asset('img/monemploi.png') }}" class="card-img-top" alt="...">
+                    </div>
+                    <div class="col-md-9">
+                        <table class="table bg-secondary bg-opacity-25 ">
+                            <thead>
+                            <tr>
+                                <th scope="col">Numéro</th>
+                                <th scope="col">Intitulé du poste</th>
+                                <th scope="col">Employeur</th>
+                                <th scope="col">Date de publication</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                           {# {% for of in offre %}
+                                <tr>
+                                    <td>{{ of.id }}</td>
+                                    <td>{{ of.intitule }}</td>
+                                    <td>{{ of.employeur }}</td>
+                                    <td>{{ of.dateDePublication|date("m/d/Y") }}</td>
+                                    <td><a href="" class="btn btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</a>
+                                        #}{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</button> #}{#
+                                    </td>
+                                    #}{# <td><a href="update-article/{{ article.id }}">Update</a></td> #}{#
+                                </tr>
+                            {% endfor %}#}
+                            </tbody>
+                        </table>
+
+                        <!-- debut modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                                data-bs-whatever="@mdo">Consulter
+                        </button>
+                        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">d</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-name" class="col-form-label">Détail de
+                                                    l'offre</label>
+                                                <input type="text" class="form-control" id="recipient-name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="button" class="btn btn-primary">Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fin modal -->
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block javascripts %}
+        <script>
+            var exampleModal = document.getElementById('modal')
+            exampleModal.addEventListener('show.bs.modal', function (event) {
+                // Button that triggered the modal
+                var button = event.relatedTarget
+                // Extract info from data-bs-* attributes
+                var recipient = button.getAttribute('data-bs-whatever')
+                // If necessary, you could initiate an AJAX request here
+                // and then do the updating in a callback.
+                //
+                // Update the modal's content.
+                var modalTitle = exampleModal.querySelector('.modal-title')
+                var modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+                modalTitle.textContent = 'Detail de l\'offre'
+                modalBodyInput.value = recipient
+            })
+        </script>
+    {% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+{# {% block title %} {{ parent() | Souscription }} {% endblock %} #}
+{% block stylesheets %}
+    <style type="text/css">
+        .form_profil {
+            width: 100%;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+
+    {% block nav %}
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Qui sommes-nous?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('offre_inserer') }}">Nouvelle
+                            offre</a>
+                    </li>
+
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ path('candidat_profil') }}">profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ path('app_logout') }}">Deconnexion</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block body %}
+        <form method="post" action="" class="form_profil">
+            <div class="card d-grid gap-2 d-md-flex justify-content-md-center">
+                <div class="card-header d-flex justify-content-center">
+                    <h3>Profil</h3>
+                </div>
+                <div class="card-body bg-secondary bg-opacity-25">
+                    {# {{ form_start(candidatForm) }} #}
+                    {# {{ form_start(candidatForm, {'action': path('main_accueil'), 'method': 'post'}) }} #}
+                    <form action="" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="nom" class=" form-label">Nom : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.nom }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="login" class=" form-label">Login : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.login }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="metier" class=" form-label">Métier : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.metier }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="code_postal" class=" form-label">Code postal : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.codePostal }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="email" class=" form-label">Email : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.email }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="prenom" class=" form-label">Prénom : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.prenom }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="date_de_naissance" class=" form-label">Date de naissance: </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.dateDeNaissance|date("m/d/Y") }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="adresse" class=" form-label">Adresse : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.adresse }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="ville" class=" form-label">Ville : </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.ville }}
+                                    </div>
+                                </div>
+                               {# <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="mot_de_passe" class=" form-label">Mot de passe: </label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        {{ app.user.password }}
+                                    </div>
+                                </div>#}
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            {# <a href="{{ path('main_accueil') }}" ><button type="button" class="btn btn-success">Enregistrer</button></a> #}
+                            <button type="submit" class="btn btn-success">Modifier</button>
+                            <a href="{{ path('offre_welcome') }}"><button type="button" class="btn btn-primary">Retour</button></a>
+                        </div>
+                    </form>
+                    {# {{ form_end(candidatForm) }} #}
+                </div>
+            </div>
+        </form>
+    {% endblock %}

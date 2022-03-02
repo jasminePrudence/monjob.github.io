@@ -1,0 +1,305 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nouvelle offre{% endblock %}
+{% block stylesheets %}
+    <style type="text/css">
+        .form_offre {
+            width: 100%;
+            max-width: 80%;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <form action="" method="POST" class="form_offre">
+        <div class="card bg-secondary bg-opacity-25  d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="card-header d-flex justify-content-center">
+                <h3>Nouvelle offre d'emploi</h3>
+            </div>
+            <div class="card-body bg-secondary bg-opacity-25">
+                {{ form_start(offreForm) }}
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3 row ">
+                            <label for="intitule" class="col-sm-3 col-form-label">Intitulé du poste</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.intitule) }}
+                                {# <input type="text" class="form-control" id="nom" name="nom"> #}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="employeur" class="col-sm-3 col-form-label">Employeur</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.employeur) }}
+                                {# <input type="text" class="form-control" id="login" name="login"> #}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="date_de_publication" class="col-sm-3 col-form-label">Date de publication</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.date_de_publication) }}
+                                {# <input type="text" class="form-control" id="metier" name="metier"> #}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="ville" class="col-sm-3 col-form-label">Ville</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.ville) }}
+                                {# <input type="text" class="form-control" id="email" name="email" #}
+                                {# value="email@example.com"> #}
+
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="code_postal" class="col-sm-3 col-form-label">Code postal</label>
+                            <div class="col-sm-9">
+{#                                {{ form_widget(offreForm.codePostal) }}#}
+                                {# <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe"> #}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        {#<div class="mb-3 row">
+                            <label for="prenom" class="col-sm-3 col-form-label">Adresse</label>
+                            <div class="col-sm-9">
+                                <label for="adresse" class="col-sm-3 col-form-label">Adresse :</label>
+                                <div class="col-sm-9">
+                                    <label for="numero" class="col-sm-3 col-form-label">Numéro</label>
+                                    {{ form_widget(offreForm.numero) }}
+                                    <div class="row">
+                                        <label for="type" class="col-sm-3 col-form-label">Type</label>
+                                        <div class="col">
+                                            {{ form_widget(offreForm.type) }}
+                                        </div>
+                                    </div>
+                                    <label for="nom" class="col-sm-3 col-form-label">Nom</label>
+                                    {{ form_widget(offreForm.nom) }}
+                                    <label for="complement_adresse" class="col-sm-3 col-form-label">Complément
+                                        d'Adresse</label>
+                                    {{ form_widget(offreForm.complement_adresse) }}
+                                </div>
+                            </div>#}
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nature_contrat" class="col-sm-3 col-form-label">Nature du contrat</label>
+                            <div class="col-sm-9">
+{#                                {{ form_widget(offreForm.nature_contrat) }}#}
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="genre" class="col-sm-3 col-form-label">Genre</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.genre) }}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="rythme" class="col-sm-3 col-form-label" >Rythme</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.rythme) }}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="salaire" class="col-sm-3 col-form-label" >Salaire</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.salaire) }}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="periode" class="col-sm-3 col-form-label" >Période</label>
+                            <div class="col-sm-9">
+{#                                {{ form_widget(offreForm.periode) }}#}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="description" class="col-sm-3 col-form-label" >Description</label>
+                            <div class="col-sm-9">
+                                {{ form_widget(offreForm.description) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                    <button type="button" class="btn btn-primary">Annuler</button>
+                </div>
+                {{ form_end(offreForm) }}
+                {# <div class="row">
+                <div class="col">
+                    <div class="mb-3 row ">
+                        <label for="intitule" class="col-sm-3 col-form-label">Intitulé du poste</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="intitule" name="intitule">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="employeur" class="col-sm-3 col-form-label">Employeur</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="employeur" name="employeur">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="date_de_publication" class="col-sm-3 col-form-label">Date de publication</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="date_de_publication"
+                                   name="date_de_publication">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="adresse" class="col-sm-3 col-form-label">Adresse :</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="numero" placeholder="Numero" name="numero">
+                            <div class="row">
+                                <label for="type" class="col-sm-3 col-form-label">Type</label>
+                                <div class="col">
+                                    <select  name="type" id="type" class="form-select" aria-label="Default select example">
+                                        <option value="" selected="selected" disabled>Choisir</option>
+                                         {% for t in type %}
+                                             <option value="{{t.id}}">{{t.nom}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="nom" name="nom" placeholder="nom">
+                            <input type="text" class="form-control" id="complement_adresse" name="complement_adresse"
+                                   placeholder="complement_adresse">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="code_postal" class="col-sm-3 col-form-label">Code postal</label>
+                        <div class="col-sm-9">
+                            <select id="code_postal" name="code_postal" class="form-select" aria-label="Default select example">
+                                <option value="" selected="selected" disabled>Choisir</option>
+                                {% for c in code_postal %}
+                                    <option value="{{c.id }}">{{ c.numero }}</option>
+                                {% endfor %}
+                                <option name="" value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="ville" class="col-sm-3 col-form-label">Ville</label>
+                        <div class="col-sm-9">
+                            <select id="ville" name="ville" class="form-select" aria-label="Default select example">
+                                {% for v in ville %}
+                                    <option value={{v.nom}}[{{v.id}}]>{{v.nom}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="nature_contrat" class="col-sm-3 col-form-label">Nature du contrat</label>
+                        <div class="col-sm-9">
+                            <select id="nature_contrat" name=nature_contrat class="form-select" aria-label="Default select example">
+                                <option value="" selected="selected" disabled>Choisir</option>
+                                {% for n in nature_contrat %}
+                                    <option value="{{n.nom}}">{{n.nom}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="genre" class="col-sm-3 col-form-label">Genre</label>
+                        <div class="form-check mb-3 col">
+                            <input class="form-check-input" type="radio" name="genre" id="genre">
+                            <label class="form-check-label" for="genre">
+                                Télétravail
+                            </label>
+                        </div>
+                        <div class="form-check mb-3 col">
+                            <input class="form-check-input" type="radio" name="genre" id="genre" checked>
+                            <label class="form-check-label" for="genre">
+                                Présentiel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="rythme" class="col-sm-3 col-form-label">Rythme</label>
+                        <div class="form-check mb-3 col">
+                            <input class="form-check-input" type="radio" name="rythme" id="rythme">
+                            <label class="form-check-label" for="rythme">
+                                Temps plein
+                            </label>
+                        </div>
+                        <div class="form-check mb-3 col">
+                            <input class="form-check-input" type="radio" name="rythme" id="rythme" checked>
+                            <label class="form-check-label" for="rythme">
+                                Temps partiel
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3 row d-flex">
+                        <label for="salaire" class="col-sm-3 col-form-label">Salaire</label>
+                        <div class="col-sm-3">
+                            <div class="col">
+                                <input type="text" class="form-control" id="salaire" name="salaire" placeholder="€">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="periode" class="col-sm-4 col-form-label">Période</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select id="periode" name="periode" class="form-select col-sm-3" aria-label="Default select example">
+                                <option value="" selected="selected" disabled>Choisir</option>
+                                {% for p in periode %}
+                                    <option value="{{p.id}}">{{ p.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="description" name="description" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <button type="button" class="btn btn-primary">Annuler</button>
+                    </div>
+                </div>
+                </div> #}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+// you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+
+        wwindow.onload = () => {
+            let ville = document.querySelector("#ville");
+            ville.addEventListener("change", function () {
+                let form = this.closed("form");
+                let data = this.nom = +"=" + this.value;
+
+                fetch(form.action, {
+                    method: form.getAttribute("method"),
+                    body: data,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded;",
+                        charset: utf - 8,
+                    }
+                })
+                    .then(response => response.text())
+                    .then(html => {
+                        let content = document.createElement("html");
+                        content.innerHTML = html;
+                        let nouveauSelect = content.querySelector("#code_postal")
+                        document.querySelector("#code_postal").replaceWith(nouveauSelect);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            });
+        }
+    </script>
+{% endblock %}

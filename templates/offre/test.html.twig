@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nouvelle offre{% endblock %}
+{% block stylesheets %}
+    <style type="text/css">
+        .form_offre {
+            width: 100%;
+            max-width: 80%;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <form action="" method="POST" class="form_offre">
+        <div class="card bg-secondary bg-opacity-25  d-grid gap-2 d-md-flex justify-content-md-center">
+            <div class="card-header d-flex justify-content-center">
+                <h3>Nouvelle offre d'emploi</h3>
+            </div>
+            <div class="card-body bg-secondary bg-opacity-25">
+                {{ form_start(testNomForm) }}
+
+                {{ form_widget(testNomForm) }}
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <button type="button" class="btn btn-primary">Annuler</button>
+                    </div>
+                {{ form_end(testNomForm) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+#site-logo a {
+    text-decoration: none !important;
+    font-size: 3rem;
+    color: var(--black-color);
+}
+
+.navbar .navbar-items {
+    list-style: none !important;
+}
+
+.navbar .navbar-items li:not(:last-child) {
+    margin-right: 0.5rem;
+}
+
+.navbar .navbar-items li > a {
+    font-size: 1.4rem;
+}
+
+.navbar .navbar-items li > a.admin {
+    font-size: 1rem !important;
+    padding: 0.5rem;
+}
+
+.navbar .navbar-items li > a.menu-link.active {
+    color: var(--primary-color);
+    background-color: var(--white-color);
+}
+
+.navbar .navbar-items li > a.menu-link.black.active {
+    color: var(--black-color);
+}
+
+.navbar .navbar-items li > a.menu-link.logout {
+    background-color: var(--white-color);
+    border-color: var(--black-color);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 4rem;
+    height: 4.5rem;
+}
+
+.navbar .navbar-items li > a.menu-link.logout span::after {
+    content: '🚪';
+}
+
+.navbar .navbar-items li > a.menu-link.logout:hover span::after,
+.navbar .navbar-items li > a.menu-link.logout:focus span::after {
+    content: '🖐';
+    animation: fading 0.5s linear;
+}
+
+@keyframes fading {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#navbar-admin {
+    position: relative;
+}
+
+#navbar-admin span.title {
+    position: absolute;
+    right: 0;
+    top: -1.2rem;
+}
