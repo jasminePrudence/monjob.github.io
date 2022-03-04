@@ -57,7 +57,6 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): PassportInterface
     {
         $email = $request->request->get('email', '');
-
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
@@ -67,6 +66,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
             ]
         );
+
     }
 
     public function getCredentials(Request $request)
@@ -98,7 +98,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Email introuvable.');
         }
 
         return $user;
@@ -107,6 +107,11 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+    }
+
+    public function getPassword($credentials): ?string
+    {
+        return $credentials['passeword'];
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

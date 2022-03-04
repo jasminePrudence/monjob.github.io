@@ -63,7 +63,7 @@ class NatureContrat
     {
         if (!$this->offres->contains($offre)) {
             $this->offres[] = $offre;
-            $offre->setNatureDuContrat($this);
+            $offre->setNatureContrat($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class NatureContrat
     {
         if ($this->offres->removeElement($offre)) {
             // set the owning side to null (unless already changed)
-            if ($offre->getNatureDuContrat() === $this) {
-                $offre->setNatureDuContrat(null);
+            if ($offre->getNatureContrat() === $this) {
+                $offre->setNatureContrat(null);
             }
         }
 

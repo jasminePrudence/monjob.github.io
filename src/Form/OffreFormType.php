@@ -7,14 +7,16 @@ use App\Entity\CodePostal;
 use App\Entity\NatureContrat;
 use App\Entity\Offre;
 use App\Entity\Periode;
+use App\Entity\Rythme;
 use App\Entity\TypeNom;
 use App\Entity\Ville;
-use ContainerPEmp88U\getVilleTypeService;
 use DateTime;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -28,7 +30,6 @@ class OffreFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $villes = $options['data_class'];
 
         $builder
             ->add('intitule', TextType::class)
@@ -36,59 +37,54 @@ class OffreFormType extends AbstractType
             ->add('date_de_publication', DateType::class, [
                 'widget' => 'choice',
             ])
-            ->add('ville', VilleType::class, [
-                // if the AddressType "allowed_countries" option is passed,
-                // use it to create a filter
-                'attr' => $villes ? function ($nom) use ($villes) {
-                    return in_array($nom, $villes, true);
-                } : null,
+            ->add('ville', EntityType::class, [
+                'class' => Ville::class,
+                'choice_label' => 'nom',
+                'placeholder' => 'Choisir',
+                'mapped' => false
+            ])
+            ->add('nature_contrat', EntityType::class, [
+                'class' => NatureContrat::class,
+                'placeholder' => 'Choisir',
+                'choice_label' => 'nom'
+            ])
+            ->add('salaire', TextType::class)
+            ->add('periode', EntityType::class, [
+                'class' => Periode::class,
+                'choice_label' => 'nom',
+                'placeholder' => 'Choisir',
+            ])
+            ->add('adresse', TextType::class)
+            ->add('complement_adresse', TextType::class)
+            ->add('codePostal', EntityType::class, [
+                'class' => CodePostal::class,
+                'choice_label' => 'numero',
+                'mapped' => false,
+                'placeholder' => 'Choisir',
 
             ])
-//            ->add('adresse', EntityType::class, [
-//                'class' => Adresse::class
-//            ])
-//            ->add('codePostal', ChoiceType::class, [
-//                'class' => CodePostal::class,
-//                'placeholder' => 'CP(Choisir votre ville)'
-//            ])
-
-            /*->add('ville', ChoiceType::class, [
-                'mapped' => false,
+            ->add('rythme', ChoiceType::class, [
+                'expanded' => true,
+                'multiple' => false,
                 'choices' => [
-                    'Angers' => 'nom',
-                    'Nantes' => 'nom',
-                    'Lille' => 'nom',
+                    'Temps plein' => 1,
+                    'Temps partiel' => 2,
                 ],
-               'choice_attr' => function($choice, $key, $value) {
-        // adds a class like attending_yes, attending_no, etc
-        return ['class' => Ville::class.strtolower($key)];
-    },*/
-                /*'choice_label' => function (?Ville $ville) {
-                    return $ville ? strtoupper($ville->getNom()) : '';
-                },
-                'choice_attr' => function (?Ville $ville) {
-                    return $ville ? ['class' => 'ville' . strtolower($ville->getNom())] : [];
-                }*/
-//            ])
+                'choice_attr' => [
+                    'Temps plein' => ['data-color' => 'Green'],
+                    'Temps partiel' => ['data-color' => 'Yellow'],
 
-//            ->add('nature_contrat', EntityType::class, [
-//                'class' => NatureContrat::class
-//            ])
-            ->add('genre', TextType::class)
-//            ->add('numero', TextType::class)
-//            ->add('nom', TextType::class)
-//            ->add('complement_adresse', TextType::class)
-//            ->add('type', EntityType::class, [
-//                'class' => TypeNom::class,
-//                'choice_label' => 'type'
-//            ])
-            ->add('rythme', TextType::class)
-            ->add('salaire', TextType::class)
-//            ->add('periode', EntityType::class, [
-//                'class' => Periode::class
-//            ])
-            ->add('description', TextType::class)//
-        ;
+                ],
+            ])
+            ->add('genre', ChoiceType::class, [
+                'expanded' => true,
+                'multiple' => false,
+                'choices' => [
+                    'Présentiel' => 'Présentiel',
+                    'Télétravail' => 'Télétravail',
+                ],
+            ])
+            ->add('description', TextareaType::class);
         /*$formModifier = function (FormInterface $form, Ville $ville=null)
         {
             $code_postals = (null===$ville) ? [] : $ville->getCodePostals();

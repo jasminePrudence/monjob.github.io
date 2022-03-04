@@ -34,10 +34,16 @@ class Ville
      */
     private $adresses;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Offre::class, mappedBy="ville")
+     */
+    private $offres;
+
     public function __construct()
     {
         $this->codePostals = new ArrayCollection();
         $this->adresses = new ArrayCollection();
+        $this->offres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,11 +120,38 @@ class Ville
         return $this;
     }
 
-    public function __toString()
+    /*public function __toString(): string
     {
         // to show the name of the Category in the select
-        return $this->nom;
+        return $this->getNom();
         // to show the id of the Category in the select
         // return $this->id;
+    }*/
+
+    /**
+     * @return Collection<int, Offre>
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->addVille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            $offre->removeVille($this);
+        }
+
+        return $this;
     }
 }

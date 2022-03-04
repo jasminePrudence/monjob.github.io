@@ -54,6 +54,7 @@ class SearchController extends AbstractController
         if($query) {
             $offre = $repo->findOffreByName($query);
         }
+//        $this->addFlash('failed', 'Aucune offre correspondante!');
         return $this->render('search/index.html.twig', [
             'offre' => $offre
         ]);

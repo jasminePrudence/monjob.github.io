@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,12 +54,6 @@ class Offre
      */
     private $salaire;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Adresse::class, inversedBy="offres")
-     */
-    private $adresse;
-
     /**
      * @ORM\ManyToOne(targetEntity=NatureContrat::class, inversedBy="offres")
      * @ORM\JoinColumn(nullable=false)
@@ -69,6 +65,33 @@ class Offre
      * @ORM\JoinColumn(nullable=false)
      */
     private $periode;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Ville::class, inversedBy="offres")
+     */
+    private $ville;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=CodePostal::class, inversedBy="offres")
+     */
+    private $code_postal;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $complement_adresse;
+
+
+    public function __construct()
+    {
+        $this->ville = new ArrayCollection();
+        $this->code_postal = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -159,18 +182,6 @@ class Offre
         return $this;
     }
 
-    public function getAdresse(): ?Adresse
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(?Adresse $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
     public function setNumero(string $numero): self
     {
         $this->numero = $numero;
@@ -201,5 +212,81 @@ public function setPeriode(?Periode $periode): self
 
     return $this;
 }
+
+/**
+ * @return Collection<int, Ville>
+ */
+public function getVille(): Collection
+{
+    return $this->ville;
+}
+
+public function addVille(Ville $ville): self
+{
+    if (!$this->ville->contains($ville)) {
+        $this->ville[] = $ville;
+    }
+
+    return $this;
+}
+
+public function removeVille(Ville $ville): self
+{
+    $this->ville->removeElement($ville);
+
+    return $this;
+}
+
+/**
+ * @return Collection<int, CodePostal>
+ */
+public function getCodePostal(): Collection
+{
+    return $this->code_postal;
+}
+
+public function addCodePostal(CodePostal $codePostal): self
+{
+    if (!$this->code_postal->contains($codePostal)) {
+        $this->code_postal[] = $codePostal;
+    }
+
+    return $this;
+}
+
+public function removeCodePostal(CodePostal $codePostal): self
+{
+    $this->code_postal->removeElement($codePostal);
+
+    return $this;
+}
+
+public function getAdresse(): ?string
+{
+    return $this->adresse;
+}
+
+public function setAdresse(?string $adresse): self
+{
+    $this->adresse = $adresse;
+
+    return $this;
+}
+
+public function getComplementAdresse(): ?string
+{
+    return $this->complement_adresse;
+}
+
+public function setComplementAdresse(?string $complement_adresse): self
+{
+    $this->complement_adresse = $complement_adresse;
+
+    return $this;
+}
+    public function __toString(): string
+    {
+        return $this->getDateDePublication();
+    }
 
 }

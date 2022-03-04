@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block body %}
-    <form method="post" action="" class="form_login">
+    <form method="post" action="{{ path('app_login') }}" class="form_login">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}

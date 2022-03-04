@@ -32,8 +32,12 @@ class OffreController extends AbstractController
      */
     public function welcome(): Response
     {
+        $offre = $this->getDoctrine()->getRepository(Offre::class);
+        $offre = $offre->findAll();
         return $this->render(
-            'offre/welcome.html.twig');
+            'offre/welcome.html.twig',
+            array('offre' => $offre)
+        );
     }
 
     /**
@@ -107,6 +111,7 @@ class OffreController extends AbstractController
             $entityManager->persist($periode);*/
             $entityManager->persist($offre);
             $entityManager->flush();
+            $this->addFlash('success', 'Enregistré avec succès!');
             return $this->redirectToRoute('offre_welcome');
 
         }

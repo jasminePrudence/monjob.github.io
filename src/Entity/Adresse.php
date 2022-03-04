@@ -25,11 +25,6 @@ class Adresse
     private $numero;
 
     /**
-     * @ORM\ManyToOne(targetEntity=CodePostal::class, inversedBy="adresses")
-     */
-    private $code_postal;
-
-    /**
      * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="adresse")
      */
     private $offres;
@@ -78,17 +73,6 @@ class Adresse
         return $this;
     }
 
-    public function getCodePostal(): ?CodePostal
-    {
-        return $this->code_postal;
-    }
-
-    public function setCodePostal(?CodePostal $code_postal): self
-    {
-        $this->code_postal = $code_postal;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Offre[]

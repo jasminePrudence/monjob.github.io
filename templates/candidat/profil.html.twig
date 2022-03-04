@@ -21,7 +21,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Qui sommes-nous?</a>
+                        <a class="nav-link active" aria-current="page" href="{{ path('main_site') }}">Qui sommes-nous?</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ path('app_register') }}">Inscription</a>
@@ -62,7 +62,7 @@
                     <form action="" method="post">
                         <div class="row">
                             <div class="col">
-                                <div class="row">
+                                <div class="row ">
                                     <div class="col-sm-3">
                                         <label for="nom" class=" form-label">Nom : </label>
                                     </div>
@@ -137,21 +137,23 @@
                                         {{ app.user.ville }}
                                     </div>
                                 </div>
-                               {# <div class="row">
+                                {# <div class="row">
                                     <div class="col-sm-3">
                                         <label for="mot_de_passe" class=" form-label">Mot de passe: </label>
                                     </div>
                                     <div class="col-sm-9">
                                         {{ app.user.password }}
                                     </div>
-                                </div>#}
+                                </div> #}
                             </div>
-                        </div>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            {# <a href="{{ path('main_accueil') }}" ><button type="button" class="btn btn-success">Enregistrer</button></a> #}
-                            <button type="submit" class="btn btn-success">Modifier</button>
-                            <a href="{{ path('offre_welcome') }}"><button type="button" class="btn btn-primary">Retour</button></a>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                {# <a href="{{ path('main_accueil') }}" ><button type="button" class="btn btn-success">Enregistrer</button></a> #}
+                                <button type="submit" class="btn btn-success">Modifier</button>
+                                <a href="{{ path('offre_welcome') }}">
+                                    <button type="button" class="btn btn-primary">Retour</button>
+                                </a>
+                            </div>
                         </div>
                     </form>
                     {# {{ form_end(candidatForm) }} #}

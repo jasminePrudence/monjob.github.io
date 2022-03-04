@@ -24,20 +24,21 @@ class CodePostal
      */
     private $numero;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Ville::class, inversedBy="codePostals")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $ville;
 
     /**
      * @ORM\OneToMany(targetEntity=Adresse::class, mappedBy="code_postal")
      */
     private $adresses;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Offre::class, mappedBy="code_postal")
+     */
+    private $offres;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
+        $this->offres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -57,17 +58,6 @@ class CodePostal
         return $this;
     }
 
-    public function getVille(): ?Ville
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?Ville $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Adresse[]
@@ -94,6 +84,33 @@ class CodePostal
             if ($adress->getCodePostal() === $this) {
                 $adress->setCodePostal(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offre>
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->addCodePostal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            $offre->removeCodePostal($this);
         }
 
         return $this;

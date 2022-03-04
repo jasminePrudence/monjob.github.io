@@ -22,11 +22,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                               href="">profil</a>
+                               href="{{ path('candidat_profil') }}">profil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                               href="">Deconnexion</a>
+                               href="{{ path('app_logout') }}">Deconnexion</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
@@ -34,7 +34,7 @@
                         </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Qui
+                        <a class="nav-link active" aria-current="page" href="{{ path('main_site') }}">Qui
                             sommes-nous?</a>
                     </li>
                     <li class="nav-item">
@@ -56,6 +56,16 @@
                     <div class="row ">
                         <i>Votre avenir garanti</i>
                     </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {#{% for message in app.flashes('failed') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}#}
                 </div>
             </div>
             <div class="card-body">
@@ -75,26 +85,26 @@
                             </tr>
                             </thead>
                             <tbody>
-                           {# {% for of in offre %}
+                            {% for of in offre %}
                                 <tr>
                                     <td>{{ of.id }}</td>
                                     <td>{{ of.intitule }}</td>
                                     <td>{{ of.employeur }}</td>
                                     <td>{{ of.dateDePublication|date("m/d/Y") }}</td>
-                                    <td><a href="" class="btn btn-primary" data-bs-toggle="modal"
-                                           data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</a>
-                                        #}{# <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</button> #}{#
+                                    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                                                data-bs-whatever="@mdo">Consulter
+                                        </button>
+                                        {#<a href="" class="btn btn-primary" data-bs-toggle="modal"
+                                           data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</a>#}
+{#                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-bs-whatever="@mdo">Consulter</button>#}
                                     </td>
-                                    #}{# <td><a href="update-article/{{ article.id }}">Update</a></td> #}{#
                                 </tr>
-                            {% endfor %}#}
+                            {% endfor %}
                             </tbody>
                         </table>
 
                         <!-- debut modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
-                                data-bs-whatever="@mdo">Consulter
-                        </button>
+
                         <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog modal-lg">
