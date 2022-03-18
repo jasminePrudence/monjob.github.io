@@ -50,7 +50,6 @@ class CandidatController extends AbstractController
         return $this->render('registration/souscription.html.twig');
     }
 
-
     /**
      * @Route("/profil", name="candidat_profil")
      */
