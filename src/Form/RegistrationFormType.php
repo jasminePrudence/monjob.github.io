@@ -29,7 +29,6 @@ class RegistrationFormType extends AbstractType
             //::class retourne le nom complet de la classe avec son name space
             ->add('prenom' , TextType::class, [
                 'label' =>'Prenom',
-
             ])
             ->add('login', null, [
                 'required'=> false

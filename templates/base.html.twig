@@ -12,9 +12,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>{% block title %} MonEmploi {% endblock %}</title>
     {% block stylesheets %} {% endblock %}
-
-
 </head>
+
 <body>
 <div class="container">
     <header>
@@ -32,16 +31,12 @@
                     {{ render(controller(
                         'App\\Controller\\SearchController::searchBar'
                     )) }}
-                    {# <input class="form-control " type="search" placeholder="Recherche" name="query" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit" name="recherche">Ici</button> #}
                 </div>
             </div>
             <div class="col d-flex justify-content-end">
                 <nav class=" navbar navbar-light  ">
-
                     {% if app.user %}
                         <i>Bonjour {{ app.user.prenom }}! </i>
-
                         <div class="col ">
                             <img src="{{ asset('img/avatar.png') }}" class="rounded-circle"
                                  style="width:40%; height:60%">
@@ -65,11 +60,6 @@
 {#                                        <a class="nav-link active" aria-current="page" href="{{ path('main_site') }}">Qui sommes-nous?</a>#}
                                     </li>
                                 </ul>
-                                {# <form class="d-flex">
-                                    <input class="form-control me-2" type="search" placeholder="Search"
-                                           aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
-                                </form>#}
                             </div>
                         </div>
                     {% endblock %}

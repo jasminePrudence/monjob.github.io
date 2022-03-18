@@ -40,6 +40,7 @@ class OffreController extends AbstractController
         );
     }
 
+
     /**
      * @Route("/form", name="offre_form")
      */
@@ -69,12 +70,6 @@ class OffreController extends AbstractController
     ): Response
     {
         $offre = new Offre();
-        $adresse = new Adresse();
-        $type = new TypeNom();
-        $code_postal = new CodePostal();
-        $ville = new Ville();
-        $periode = new Periode();
-        $nature_contrat = new NatureContrat();
 
         $form = $this->createForm(OffreFormType::class, $offre);
         $form->handleRequest($request);
@@ -82,7 +77,27 @@ class OffreController extends AbstractController
 //        if ($request->request->count() > 0) {
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /*$offre->setIntitule($request->request->get('intitule'))
+            $entityManager->persist($offre);
+            $entityManager->flush();
+            $this->addFlash('success', 'Enregistré avec succès!');
+            return $this->redirectToRoute('offre_welcome');
+
+        }
+
+        return $this->render(
+            'offre/inserer.html.twig', [
+            'offreForm' => $form->createView(),
+        ]);
+    }
+}
+/*$adresse = new Adresse();
+$type = new TypeNom();
+$code_postal = new CodePostal();
+$ville = new Ville();
+$periode = new Periode();
+$nature_contrat = new NatureContrat();*/
+
+/*$offre->setIntitule($request->request->get('intitule'))
                 ->setEmployeur($request->request->get('employeur'))
                 ->setDateDePublication(new \DateTime($request->request->get("date_de_publication")))
                 ->setGenre($request->request->get('genre'))
@@ -109,27 +124,16 @@ class OffreController extends AbstractController
             $entityManager->persist($type);
             $entityManager->persist($nature_contrat);
             $entityManager->persist($periode);*/
-            $entityManager->persist($offre);
-            $entityManager->flush();
-            $this->addFlash('success', 'Enregistré avec succès!');
-            return $this->redirectToRoute('offre_welcome');
 
-        }
 
-        /* $type = $this->getDoctrine()->getRepository(TypeNom::class)->findAll();
-         $code_postal = $this->getDoctrine()->getRepository(CodePostal::class)->findAll();
-         $ville = $this->getDoctrine()->getRepository(Ville::class)->findAll();
-         $nature_contrat = $this->getDoctrine()->getRepository(NatureContrat::class)->findAll();
-         $periode = $this->getDoctrine()->getRepository(Periode::class)->findAll();*/
+/* $type = $this->getDoctrine()->getRepository(TypeNom::class)->findAll();
+ $code_postal = $this->getDoctrine()->getRepository(CodePostal::class)->findAll();
+ $ville = $this->getDoctrine()->getRepository(Ville::class)->findAll();
+ $nature_contrat = $this->getDoctrine()->getRepository(NatureContrat::class)->findAll();
+ $periode = $this->getDoctrine()->getRepository(Periode::class)->findAll();*/
 
-        return $this->render(
-            'offre/inserer.html.twig', [
-            'offreForm' => $form->createView(),            /*'type' => $type,
-            'code_postal' => $code_postal,
-            'ville' => $ville,
-            'periode' => $periode,
-            'nature_contrat' => $nature_contrat*/
-        ]);
-    }
-}
-
+/*'type' => $type,
+           'code_postal' => $code_postal,
+           'ville' => $ville,
+           'periode' => $periode,
+           'nature_contrat' => $nature_contrat*/

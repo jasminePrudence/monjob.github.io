@@ -13,23 +13,21 @@
     <title>{% block title %} MonEmploi !!! {% endblock %}</title>
     {% block stylesheets %}
         <style>
-
         </style>
-
     {% endblock %}
 </head>
+
+//page d'accueil
+
 <body>
 <div class="container">
-
     <main>
         {% block body %}
             <div class="row p-3 mb-2 bg-secondary text-white d-flex">
                 <div class="col">
-
                     <div class="d-flex justify-content-center">
                         <h1 > WELCOME TO MonEmploi !</h1>
                     </div>
-
                     <div class="d-flex justify-content-center">
                         <img src="{{ asset('img/logo.png') }}" style="width:30%; height:40%" >
                     </div>
@@ -40,7 +38,6 @@
             </div>
         {% endblock %}
     </main>
-
     <footer id="site-footer" class="d-flex align-items-center offset">
         <div class="container">
             <div class="row">
@@ -54,5 +51,4 @@
     </footer>
 </div>
 </body>
-
 </html>
